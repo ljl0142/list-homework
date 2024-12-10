@@ -1,0 +1,18 @@
+#include<iostream>
+#include<cstring>
+using namespace std;
+struct node {
+	int value;
+	string* farm = new string[value];
+	struct node* next;
+};
+int main() {
+	node* first = new node;
+	cin >> first->value;
+	while (first->value != 0) {
+		for (int i = 1; i <= first->value; i++) {
+			cin >> first->farm[i];
+		}
+	}
+	return 0;
+}
