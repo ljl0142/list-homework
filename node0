@@ -3,13 +3,13 @@
 using namespace std;
 struct node {
 	int value;
-	string* farm = new string[value];
+	string fruit[60];
 	struct node* next;
 };
 int main() {
 	node* head = NULL;
 	node* p = new node;
-	p->value = 2;
+	cin >> p->value;
 	int x = p->value;
 	if (head == NULL) {
 		head = p;
@@ -17,7 +17,7 @@ int main() {
 	}
 	while (x != 0) {
 		for (int i = 1; i <= x; i++) {
-			cin >> p->farm[i];
+			cin >> p->fruit[i];
 		}
 		node* q = new node;
 		p->next = q;
