@@ -11,6 +11,9 @@ int main() {
 	node* p = new node;
 	cin >> p->value;
 	int x = p->value;
+	int n = 0;
+	string* fruit_type = new string[n];
+	int* count = new int[n];
 	if (head == NULL) {
 		head = p;
 		p->next = NULL;
@@ -18,12 +21,54 @@ int main() {
 	while (x != 0) {
 		for (int i = 1; i <= x; i++) {
 			cin >> p->fruit[i];
+			bool flag = true;
+			if (n == 0) {
+				n += 1;
+				string* q = new string[n];
+				delete[]fruit_type;
+				fruit_type = q;
+				fruit_type[0] = p->fruit[0];
+				int* r = new int[n];
+				delete[]count;
+				count = r;
+				count[0] = 0;
+			}
+			for (int j = 0; j < n; j++) {
+				if (p->fruit[i] == fruit_type[j]) {
+					count[j] += 1;
+				}
+				else {
+					flag = false;
+				}
+			}
+			if (flag == false) {
+				n += 1;
+				string* q = new string[n];
+				for (int k = 0; k < n - 1; k++) q[k] = fruit_type[k];
+				delete[]fruit_type;
+				fruit_type = q;
+				fruit_type[n - 1] = p->fruit[i];
+				int* r = new int[n];
+				for (int k = 0; k < n - 1; k++) r[k] = count[k];
+				delete[]count;
+				count = r;
+				count[n - 1] = 1;
+			}
 		}
 		node* q = new node;
 		p->next = q;
 		q->next = NULL;
 		cin >> q->value;
 		x = q->value;
+	}
+	int maximum = 0;
+	for (int i = 0; i < n; i++) {
+		if (count[i] >= maximum) {
+			maximum = count[i];
+		}
+	}
+	for (int i = 0; i < n; i++) {
+		if (count[i]==maximum) cout << fruit_type[i] << endl;
 	}
 	return 0;
 }
