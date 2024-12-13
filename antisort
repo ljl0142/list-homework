@@ -1,0 +1,100 @@
+#include"file1.h"
+using namespace std;
+Node* input()
+{
+	Node* head = new Node;
+	head = NULL;
+	int y = 0;
+	int x = 0;
+	char* line = new char[y + 1];
+	int* num = new int[x + 1];
+	cin >> line[y];
+	while (true) {
+		y += 1;
+		char* q = new char[y + 1];
+		for (int i = 0; i < y; i++) q[i] = line[i];
+		delete[]line;
+		line = q;
+		cin >> line[y];
+		if (y > 0) {
+			if (line[y] == '1' && line[y - 1] == '-') {
+				break;
+			}
+		}
+	}
+	num[x] = line[0] - '0';
+	for (int i = 1; i <= y; i++) {
+		if (line[i] != '-' && line[i] != '>') {
+			x += 1;
+			int* s = new int[x + 1];
+			for (int j = 0; j < x; j++) s[j] = num[j];
+			delete[]num;
+			num = s;
+			num[x] = line[i] - '0';
+			if (i < y) {
+				if (line[i + 1] != '-' && line[i + 1] != '>') {
+					int m = line[i] - '0';
+					num[x] = m * 10 + line[i + 1] - '0';
+					i += 1;
+				}
+			}
+			else num[x] = line[i] - '0';
+		}
+	}
+	for (int i = 0; i < x; i++) {
+		Node* p = new Node;
+		p->content = num[i];
+		if (head == NULL) {
+			head = p;
+		}
+		else {
+			Node* r = head;
+			while (r->next != NULL) r = r->next;
+			r->next = p;
+		}
+		p->next = NULL;
+	}
+	return head;
+}
+
+
+Node* reverseK(Node* head, int k)
+{
+	Node* h = head;
+	int l = k;
+	while (h != NULL) {
+		Node* u = h;
+		for (int i = 1; i < l; i++) {
+			u = u->next;
+		}
+		if (u!=NULL) h->content = u->content;
+		l -= 1;
+	}
+	return head;
+}
+
+
+
+void output(Node* head)
+{
+	Node* q;
+}
+
+
+void remove(Node* head)
+{
+	delete[]head;
+}
+
+
+int main()
+{
+	Node* head = input();
+	int k;
+	cin >> k;
+	Node* newhead = reverseK(head, k);
+	output(newhead);
+	remove(head);
+	remove(newhead);
+	return 0;
+}
