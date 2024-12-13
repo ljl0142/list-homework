@@ -1,0 +1,58 @@
+#include<iostream>
+#include<cstring>
+using namespace std;
+struct node {
+	int value;
+	struct node* next;
+};
+int main() {
+	int n1, n2;
+	node* head = NULL;
+	cin >> n1 >> n2;
+	for (int i = 1; i <= n1; i++) {
+		node* p = new node;
+		cin >> p->value;
+		if (head == NULL) {
+			head = p;
+			p->next = NULL;
+		}
+		else {
+			node* q = head;
+			while (q->next != NULL) {
+				q = q->next;
+			}
+			q->next = p;
+			p->next = NULL;
+		}
+	}
+	for (int i = 1; i <= n2; i++) {
+		int m;
+		cin >> m;
+		int count = 0;
+		if (m < head->value) {
+			node* t = new node;
+			t->value = m;
+			t->next = head;
+			head = t;
+		}
+		else {
+			node* r;
+			for (r = head; r != NULL; r = r->next) {
+				if (m > r->value) count += 1;
+			}
+			int j = 1;
+			node* s = head;
+			while (j < count) {
+				s = s->next;
+				j += 1;
+			}
+			node* u = new node;
+			u->value = m;
+			u->next = s->next;
+			s->next = u;
+		}
+	}
+	node* h;
+	for (h = head; h != NULL; h = h->next) cout << h->value << ' ';
+	return 0;
+}
