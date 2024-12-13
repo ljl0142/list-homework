@@ -58,7 +58,7 @@ pear
 
 说明：
 （1）用单链表实现数据的存储。  
-单链表的节点类型是：
+单链表的节点类型是：  
 struct Node{  
   int content;  
   Node * next;  
