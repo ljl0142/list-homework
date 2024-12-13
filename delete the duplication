@@ -1,0 +1,51 @@
+#include "file1.h"
+Node* input()
+{
+    Node* head = NULL;
+    Node* p = new Node;
+    cin >> p->content;
+    int x = p->content;
+    while (x != -1) {
+        if (head == NULL) {
+            head = p;
+            p->next = NULL;
+        }
+        else {
+            Node* u = new Node;
+            cin >> u->content;
+            x = u->content;
+            Node* h = head;
+            while (h->next != NULL) h = h->next;
+            h->next = u;
+            u->next = NULL;
+        }
+    }
+    return p;
+}
+void output(Node* head)
+{
+    Node* q;
+    for (q = head; q->next != NULL; q = q->next) cout << q->content << ' ';
+}
+void deduplicate(Node* head)
+{
+    Node* r = head;
+    while (r->next != NULL) {
+        L:Node* s = head;
+        while (s != r->next) {
+            if (r->next->content == s->content) {
+                Node* u;
+                u = r->next;
+                r->next = u->next;
+                delete u;
+                goto L;
+            }
+            s = s->next;
+        }
+        r = r->next;
+    }
+}
+void remove(Node* head)
+{
+    delete[]head;
+}
